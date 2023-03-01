@@ -76,8 +76,41 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate & 
                         // hata mesajı yoksa url yi yazdırmaya çalışıyoruz
                         if error == nil {
                             // absolutestring ile url nin string halini aldık
-                           let imageurl = url?.absoluteString
-                            print(imageurl)
+                            let imageUrl = url?.absoluteString
+                            //   print(imageurl)
+                            
+                            
+                            // image i opsiyonellikten çıkarmak için
+                            if let imageUrl = imageUrl {
+                                // !!!! VERİ TABANINA KAYDETME İŞLEMİ !!!!!
+                                // post koleksiyonuna veri eklemek için FireStore nesnemizi oluşturuyoruz
+                                let fireStoreDatabes = Firestore.firestore()
+                                let firestorePost = ["gorselurl" : imageUrl, "yorum" : self.aciklamaTextField.text! , "email" : Auth.auth().currentUser!.email, "tarih" : FieldValue.serverTimestamp()] as [String : Any]
+                                
+                                fireStoreDatabes.collection("Post").addDocument(data: firestorePost) {
+                                    (error) in
+                                    if error != nil {
+                                        self.hatamesaji(title: "Hata!", message: error?.localizedDescription ?? "Hata Aldınız, Tekrar Deneyiniz")
+                                    }else {
+                                       // gorsel yükledikten sonra feed e gidilicek ve upload ekranına tekrar geldiğimizde resim gprselsec yorum kısmı boş olucak 
+                                        self.imageview.image = UIImage(named: "gorselsec")
+                                        self.aciklamaTextField.text = ""
+                                        
+                                        // index ile seçim yapıcaz soldan sağa 0-1-2 feed upload settings
+                                        self.tabBarController?.selectedIndex = 0 // feed e geçiş yapılıcak
+                                        
+                                    }
+                                }
+                                
+                                
+                                
+                                
+                            }
+                            
+                         
+                            
+                            
+                            
                         }
                         
                     }
@@ -95,7 +128,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate & 
         let alert = UIAlertController(title:title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default,handler: nil)
         alert.addAction(okButton)
-        
         self.present(alert, animated: true,completion: nil)
         
     }
