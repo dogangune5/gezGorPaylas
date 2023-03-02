@@ -18,6 +18,7 @@
 		2D8379E529AD5C1B00ADA9BF /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8379E429AD5C1B00ADA9BF /* FeedViewController.swift */; };
 		2D8379E729AD5C8000ADA9BF /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8379E629AD5C8000ADA9BF /* UploadViewController.swift */; };
 		2D8379E929AD5C9A00ADA9BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8379E829AD5C9A00ADA9BF /* SettingsViewController.swift */; };
+		2DAE495029AF950100F28F6E /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAE494F29AF950100F28F6E /* FeedCell.swift */; };
 		A30EF38BB78E8882BD5BDBF5 /* Pods_gezGorPaylas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7835266350B83EBF09DE7D /* Pods_gezGorPaylas.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		2D8379E429AD5C1B00ADA9BF /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		2D8379E629AD5C8000ADA9BF /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		2D8379E829AD5C9A00ADA9BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2DAE494F29AF950100F28F6E /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		340C8C80BC304E9B607E5109 /* Pods-gezGorPaylas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gezGorPaylas.release.xcconfig"; path = "Target Support Files/Pods-gezGorPaylas/Pods-gezGorPaylas.release.xcconfig"; sourceTree = "<group>"; };
 		BE7835266350B83EBF09DE7D /* Pods_gezGorPaylas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gezGorPaylas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				2D8379CD29AD2F3500ADA9BF /* SceneDelegate.swift */,
 				2D8379CF29AD2F3500ADA9BF /* ViewController.swift */,
 				2D8379E429AD5C1B00ADA9BF /* FeedViewController.swift */,
+				2DAE494F29AF950100F28F6E /* FeedCell.swift */,
 				2D8379E629AD5C8000ADA9BF /* UploadViewController.swift */,
 				2D8379E829AD5C9A00ADA9BF /* SettingsViewController.swift */,
 				2D8379D129AD2F3500ADA9BF /* Main.storyboard */,
@@ -227,6 +230,7 @@
 				2D8379E929AD5C9A00ADA9BF /* SettingsViewController.swift in Sources */,
 				2D8379D629AD2F3500ADA9BF /* gezGorPaylas.xcdatamodeld in Sources */,
 				2D8379E529AD5C1B00ADA9BF /* FeedViewController.swift in Sources */,
+				2DAE495029AF950100F28F6E /* FeedCell.swift in Sources */,
 				2D8379CC29AD2F3500ADA9BF /* AppDelegate.swift in Sources */,
 				2D8379CE29AD2F3500ADA9BF /* SceneDelegate.swift in Sources */,
 			);

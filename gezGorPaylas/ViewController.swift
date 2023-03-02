@@ -60,8 +60,7 @@ class ViewController: UIViewController {
                 // eğer hata varsa
                 if error != nil {
                     // burada firebasein bize verdiği hata mesajını kullanıcıya gösterticez
-                   
-                    
+    
                     // eğer locallizerDescription kısmı gösterilebiliyorsa orası gösterilicek gösterilemiyorsa bizim yazımız gösterilicek (?? )
                     self.hataMesaji(titleInput: "Hata !", messageInput: error?.localizedDescription ?? "Hata aldınız Tekrar deneyiniz")
                     
