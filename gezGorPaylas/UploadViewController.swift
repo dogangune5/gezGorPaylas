@@ -132,4 +132,11 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate & 
         
     }
     
+    @IBAction func btnKonumEkle(_ sender: Any) {
+        performSegue(withIdentifier: "toNot", sender: nil)
+    }
+    
+    
+    
+    
 }
