@@ -92,6 +92,55 @@ class KonumNotViewController: UIViewController,UITableViewDataSource,UITableView
         
     }
     
+    
+    // TABLE VİEW DA SİLME İŞLEMİ
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context =  appDelegate.persistentContainer.viewContext
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Yer")
+            let uuidString = idDizisi[indexPath.row].uuidString
+            
+            
+            fetchRequest.predicate = NSPredicate(format: "id = %@", uuidString)
+            fetchRequest.returnsObjectsAsFaults = false
+            
+            
+            do {
+                let sonuclar = try context.fetch(fetchRequest)
+                
+                if sonuclar.count > 0 {
+                    
+                    for sonuc in sonuclar as! [NSManagedObject] {
+                        if let id = sonuc.value(forKey: "id") as? UUID {
+                            if id == idDizisi[indexPath.row] {
+                                context.delete(sonuc)
+                                isimDİzisi.remove(at: indexPath.row)
+                                idDizisi.remove(at: indexPath.row)
+                                
+                                self.tableviewNot.reloadData()
+                                do {
+                                    try context.save()
+                                }catch{
+                                    print("hata !")
+                                }; break
+                                
+                            }
+                        }
+                    }
+                    
+                }
+                
+            }catch{print("hata !")}
+            
+            
+        }
+    }
+    
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMap" {
             let destinationVC = segue.destination as! mapViewController
@@ -107,6 +156,14 @@ class KonumNotViewController: UIViewController,UITableViewDataSource,UITableView
         secilenYerIsmi = "" // EĞER DİREKT BU BUTONA TIKLARSA YER EKLEMEYE GELDİĞİNİ ANLAYALIM
         performSegue(withIdentifier: "toMap", sender: nil)
     }
+    
+    
+    
+    
+    @IBAction func btnbacktoUpload(_ sender: Any) {
+        performSegue(withIdentifier: "toFeedVC", sender: nil)
+    }
+    
     
     
 }

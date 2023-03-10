@@ -12,6 +12,10 @@ import CoreData
 class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDelegate {
 
     
+    
+    @IBOutlet weak var butonKaydet: UIButton!
+    
+    
     @IBOutlet weak var baslikTextField: UITextField!
     
     @IBOutlet weak var notTextField: UITextField!
@@ -42,6 +46,16 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
+        let klavyeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(klavyeyiKapat))
+        view.addGestureRecognizer(klavyeGestureRecognizer)
+        
+        
+        
+        
+        
+        
         mapview.delegate = self
        
         // KULLANICININ KONUMUNU ALMAK
@@ -62,7 +76,7 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
         // DİĞER EKRANDAKİ EKLEME BUTONUNDA SECİLENİSMİ BOŞ YAPTIK ORAYA TIKLANIRSA ELSE YE GİİRCEK 
         if secilenIsim != "" {
             // Core Datadan verileri Çek
-
+            butonKaydet.isHidden = true
             
             // id çekme NSPredicate ile çekerken lazım
             if let uuidString = secilenID?.uuidString {
@@ -105,7 +119,7 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
                                         notTextField.text = annotationSubtitle
                                         locationManager.stopUpdatingLocation()
                                         
-                                        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                                        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
                                         
                                         let region = MKCoordinateRegion(center: coordinate, span: span)
                                         mapview.setRegion(region, animated: true)
@@ -140,6 +154,10 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
             
 
         }else {
+            butonKaydet.isHidden = false
+            butonKaydet.isEnabled = false
+            baslikTextField.text = ""
+            notTextField.text = ""
             // yeni veri eklemeye geldi
         }
         
@@ -169,7 +187,7 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
             annotation.title = baslikTextField.text
             annotation.subtitle = notTextField.text
             mapview.addAnnotation(annotation)
-            
+            butonKaydet.isEnabled = true
         }
 
 
@@ -178,7 +196,9 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
     
     
     
-    
+    @objc func klavyeyiKapat() {
+        view.endEditing(true)
+    }
     
     
     // güncelledikçe konumları veriyor
@@ -206,6 +226,11 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
     
     @IBAction func btnKaydet(_ sender: Any) {
         
+        
+        
+        
+        
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -226,7 +251,7 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
         
         // GÖZLEMCİ OLUŞTURULDU
         NotificationCenter.default.post(name: NSNotification.Name("gozlemciOlusturuldu"), object: nil)
-        navigationController?.popViewController(animated: true) // BİR ÖNCEKİ SAYFAYA GERİ DÖNME
+      //  navigationController?.popViewController(animated: true) // BİR ÖNCEKİ SAYFAYA GERİ DÖNME
         
         
         
@@ -279,7 +304,7 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
             let requestLocation = CLLocation(latitude: annotationLatitude, longitude: annotationLongitude)
             
             
-            // koordinatlar arasında bağlantı yapıyor (CLGeocoder)
+            // koordinatlar arasında bağlantı yapıyor (CLGeocoder) bulunduğun yerden gitmek istediğin yere nasıl gideceğin ? 
             CLGeocoder().reverseGeocodeLocation(requestLocation) { (placemarkDizisi, hata) in
                 
                 if let placemarks = placemarkDizisi {
@@ -303,6 +328,10 @@ class mapViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDe
         }
     }
     
+    
+    @IBAction func btnback(_ sender: Any) {
+        performSegue(withIdentifier: "toNot", sender: nil)
+    }
     
 
 }

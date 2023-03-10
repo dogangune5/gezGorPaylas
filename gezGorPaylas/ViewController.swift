@@ -19,8 +19,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(klavyeKapat))
+        view.addGestureRecognizer(gestureRecognizer)
+ 
     }
 
+    @objc func klavyeKapat() {
+        view.endEditing(true)
+    }
+    
     @IBAction func btnGirisYap(_ sender: Any) {
         
         if emailTextField.text != "" && sifreTextField.text != "" {

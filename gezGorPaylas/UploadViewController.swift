@@ -15,18 +15,37 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate & 
     @IBOutlet weak var aciklamaTextField: UITextField!
     
     
+    @IBOutlet weak var butonUpload: UIButton!
     
     
     
     
     override func viewDidLoad() {
-      
+        
         super.viewDidLoad()
         
+       
         // GÖRSEL SEÇMEK İÇİN
         imageview.isUserInteractionEnabled = true
         let imagegestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(gorselSec))
         imageview.addGestureRecognizer(imagegestureRecognizer)
+        
+        let klavyeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(klavyeyiKapat))
+        view.addGestureRecognizer(klavyeGestureRecognizer)
+        
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        butonUpload.isEnabled = false
+        
+    }
+    
+    
+    
+    @objc func klavyeyiKapat() {
+        view.endEditing(true)
     }
     
     @objc func gorselSec() {
@@ -40,7 +59,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate & 
     }
     // GÖRSEL SEÇİLDİKTEN SONRA
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+        butonUpload.isEnabled = true
         imageview.image = info[.originalImage] as? UIImage
         self.dismiss(animated: true,completion: nil)
         
